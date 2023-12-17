@@ -25,5 +25,35 @@ public class Clock {
     this.isPaused = false;
   }
 
+  public void update() {
+    long currentUpdate = getCurrentTime();
+    float delta = float(currentUpdate - update) + cyclesLeft;
+
+    if(!isPaused) {
+      this.cyclesPassed += (int)Math.floor(delta / msPerCycle);
+      this.cyclesLeft = delta % msPerCycle;
+    }
+    this.update = currentUpdate;
+  }
+  
+  public boolean isPaused() {
+    return isPaused;
+  }
+
+  public boolean hasCyclePassed() {
+    if(cyclesPassed > 0) {
+      this.cyclesPassed--;
+      return true;
+    }
+    return false;
+  }
+
+  public boolean cyclePassed() {
+    return (cyclesPassed > 0)
+  }
+
+  public static final long getCurrentTime() {
+      return (System.nanoTime() / 1000000L);
+  }
   
 }
