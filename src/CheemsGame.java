@@ -7,7 +7,7 @@ import java.util.Random;
 
 import javax.swing.JFrame;
 
-public class SnakeGame extends JFrame {
+public class CheemsGame extends JFrame {
   private static final long FRAME_TIME = 1000L / 50L;
 
   private BoardPanel board;
@@ -19,14 +19,14 @@ public class SnakeGame extends JFrame {
   private boolean isGameOver;
   private boolean isPaused;
 
-  private LinkedList<Point> snake;
+  private LinkedList<Point> cheems;
   private LinkedList<Direction> directions;
 
   private int score;
   private int fruitsEaten;
   private int nextFruitScore;
 
-	public SnakeGame() {
+	public CheemsGame() {
 		super("Cheems's Burger Adventure");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -116,7 +116,7 @@ public class SnakeGame extends JFrame {
 
   private void startGame() {
 		this.random = new Random();
-		this.snake = new LinkedList<>();
+		this.cheems = new LinkedList<>();
 		this.directions = new LinkedList<>();
 		this.logicTimer = new Clock(9.0f);
 		this.isNewGame = true;
@@ -146,13 +146,13 @@ public class SnakeGame extends JFrame {
   }
 
   private void updateGame() {
-    TileType collision = updateSnake();
+    TileType collision = updatecheems();
     
-		if(collision == TileType.Fruit) {
+		if(collision == TileType.Burger) {
 			fruitsEaten++;
 			score += nextFruitScore;
 			spawnFruit();
-		} else if(collision == TileType.SnakeBody) {
+		} else if(collision == TileType.CheemsBody) {
 			isGameOver = true;
 			logicTimer.setPaused(true);
 		} else if(nextFruitScore > 10) {
@@ -160,10 +160,10 @@ public class SnakeGame extends JFrame {
 		}
   }
 
-  private TileType updateSnake() {
+  private TileType updatecheems() {
     Direction direction = directions.peekFirst();
 
-  	Point head = new Point(snake.peekFirst());
+  	Point head = new Point(cheems.peekFirst());
 		switch(direction) {
   		case Up:
   			head.y--;
@@ -183,20 +183,20 @@ public class SnakeGame extends JFrame {
 		}
     
 		if(head.x < 0 || head.x >= BoardPanel.COLUMN || head.y < 0 || head.y >= BoardPanel.ROW) {
-			return TileType.SnakeBody;
+			return TileType.CheemsBody;
 		}
 
 		TileType old = board.getTile(head.x, head.y);
-		if(old != TileType.Fruit && snake.size() > 5) {
-			Point tail = snake.removeLast();
+		if(old != TileType.Burger && cheems.size() > 5) {
+			Point tail = cheems.removeLast();
 			board.setTile(tail, null);
 			old = board.getTile(head.x, head.y);
 		}
 
-		if(old != TileType.SnakeBody) {
-			board.setTile(snake.peekFirst(), TileType.SnakeBody);
-			snake.push(head);
-			board.setTile(head, TileType.SnakeHead);
+		if(old != TileType.CheemsBody) {
+			board.setTile(cheems.peekFirst(), TileType.CheemsBody);
+			cheems.push(head);
+			board.setTile(head, TileType.CheemsHead);
 			if(directions.size() > 1) {
 				directions.poll();
 			}
@@ -214,11 +214,11 @@ public class SnakeGame extends JFrame {
 
     Point head = new Point(BoardPanel.COLUMN / 2, BoardPanel.ROW / 2);
 
-    snake.clear();
-    snake.add(head);
+    cheems.clear();
+    cheems.add(head);
 
     board.clearBoard();
-    board.setTile(head, TileType.SnakeHead);
+    board.setTile(head, TileType.CheemsHead);
 
     directions.clear();
     directions.add(Direction.Up);
@@ -243,15 +243,15 @@ public class SnakeGame extends JFrame {
   private void spawnFruit() {
     this.nextFruitScore = 100;
 
-    int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - snake.size());
+    int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
 
 		int freeFound = -1;
 		for(int x = 0; x < BoardPanel.COLUMN; x++) {
 			for(int y = 0; y < BoardPanel.ROW; y++) {
 				TileType type = board.getTile(x, y);
-				if(type == null || type == TileType.Fruit) {
+				if(type == null || type == TileType.Burger) {
 					if(++freeFound == index) {
-						board.setTile(x, y, TileType.Fruit);
+						board.setTile(x, y, TileType.Burger);
 						break;
 					}
 				}
@@ -276,7 +276,7 @@ public class SnakeGame extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		SnakeGame snake = new SnakeGame();
-		snake.startGame();
+		CheemsGame cheems = new CheemsGame();
+		cheems.startGame();
 	}
 }

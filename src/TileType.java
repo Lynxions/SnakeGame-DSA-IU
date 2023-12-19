@@ -1,10 +1,10 @@
 
 public enum TileType {
 
-	Fruit,
+	Burger,
 	
-	SnakeHead,
+	CheemsHead,
 	
-	SnakeBody
+	CheemsBody
 	
 }

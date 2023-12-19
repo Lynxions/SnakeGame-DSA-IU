@@ -10,9 +10,9 @@ public class SidePanel extends JPanel {
   private static final Font MEDIUM_FONT = new Font("Arial", Font.BOLD, 16);
   private static final Font SMALL_FONT = new Font("Arial", Font.BOLD, 12);
 
-  private SnakeGame game;
+  private CheemsGame game;
 
-  public SidePanel(SnakeGame game) {
+  public SidePanel(CheemsGame game) {
     this.game = game;
 
     setPreferredSize(new Dimension(300, BoardPanel.ROW * BoardPanel.TILE_SIZE));

@@ -12,10 +12,10 @@ public class BoardPanel extends JPanel {
   public static final int TILE_SIZE = 20;
   
   private static final Font FONT = new Font("Arial", Font.BOLD, 25);
-  private SnakeGame game;
+  private CheemsGame game;
   private TileType[] tiles;
 
-  public BoardPanel(SnakeGame game) {
+  public BoardPanel(CheemsGame game) {
     this.game = game;
     this.tiles = new TileType[COLUMN * ROW];
 
@@ -72,7 +72,7 @@ public class BoardPanel extends JPanel {
       String largeMessage = null;
 			String smallMessage = null;
 			if(game.isNewGame()) {
-				largeMessage = "Snake Game!";
+				largeMessage = "Cheems Game!";
 				smallMessage = "Press Enter to Start";
 			} else if(game.isGameOver()) {
 				largeMessage = "Game Over!";
@@ -90,17 +90,17 @@ public class BoardPanel extends JPanel {
 
   private void drawTile(int x, int y, TileType type, Graphics g) {
     switch(type) {
-      case Fruit:
+      case Burger:
         g.setColor(Color.RED);
         g.fillOval(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
 			  break;
 
-      case SnakeBody:
+      case CheemsBody:
         g.setColor(Color.GREEN);
 			  g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 			  break;
         
-      case SnakeHead:
+      case CheemsHead:
         g.setColor(Color.GREEN);
         g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
     }
