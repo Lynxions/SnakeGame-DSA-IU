@@ -27,7 +27,7 @@ public class Clock {
 
   public void update() {
     long currentUpdate = getCurrentTime();
-    float delta = float(currentUpdate - update) + cyclesLeft;
+    float delta = (float)(currentUpdate - update) + cyclesLeft;
 
     if(!isPaused) {
       this.cyclesPassed += (int)Math.floor(delta / msPerCycle);
@@ -36,6 +36,10 @@ public class Clock {
     this.update = currentUpdate;
   }
   
+  public void setPaused(boolean paused) {
+		this.isPaused = paused;
+	}
+
   public boolean isPaused() {
     return isPaused;
   }
@@ -49,7 +53,7 @@ public class Clock {
   }
 
   public boolean cyclePassed() {
-    return (cyclesPassed > 0)
+    return (cyclesPassed > 0);
   }
 
   public static final long getCurrentTime() {

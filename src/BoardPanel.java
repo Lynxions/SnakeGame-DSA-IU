@@ -11,7 +11,7 @@ public class BoardPanel extends JPanel {
   public static final int ROW = 25;
   public static final int TILE_SIZE = 20;
   
-  private static final font FONT = new Font("Arial", Font.BOLD, 25);
+  private static final Font FONT = new Font("Arial", Font.BOLD, 25);
   private SnakeGame game;
   private TileType[] tiles;
 
@@ -19,8 +19,8 @@ public class BoardPanel extends JPanel {
     this.game = game;
     this.tiles = new TileType[COLUMN * ROW];
 
-    setPreferredSize(new Dimension(COLUMN * TILE_SIZE, ROW * TILE_SIZE);
-    setBackground(Color.Black);
+    setPreferredSize(new Dimension(COLUMN * TILE_SIZE, ROW * TILE_SIZE));
+    setBackground(Color.BLACK);
   }
 
   public void clearBoard() {
@@ -45,8 +45,8 @@ public class BoardPanel extends JPanel {
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
-    for (int x = 0; x < COLUMN, x++) {
-      for (int y = 0; y < ROW, y++) {
+    for (int x = 0; x < COLUMN; x++) {
+      for (int y = 0; y < ROW; y++) {
         TileType type = getTile(x, y);
         if (type != null) {
           drawTile(x * TILE_SIZE, y * TILE_SIZE, type, g);

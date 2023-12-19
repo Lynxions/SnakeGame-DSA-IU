@@ -15,7 +15,7 @@ public class SidePanel extends JPanel {
   public SidePanel(SnakeGame game) {
     this.game = game;
 
-    setPreferredSize(new Dimension(300, BoardPanel.ROW_COUNT * BoardPanel.TILE_SIZE));
+    setPreferredSize(new Dimension(300, BoardPanel.ROW * BoardPanel.TILE_SIZE));
 		setBackground(Color.BLACK);
   }
 
@@ -26,7 +26,7 @@ public class SidePanel extends JPanel {
 		g.setColor(Color.WHITE);
 
 		g.setFont(LARGE_FONT);
-		g.drawString("Cheems Game", getWidth() / 2 - g.getFontMetrics().stringWidth("Cheems Game") / 2, 50);
+		g.drawString("Cheems's Burger Adventure", getWidth() / 2 - g.getFontMetrics().stringWidth("Cheems's Burger Adventure") / 2, 50);
 
 		g.setFont(MEDIUM_FONT);
 		g.drawString("Statistics", 30, 150);
@@ -39,11 +39,11 @@ public class SidePanel extends JPanel {
 		g.drawString("Burgers Eaten: " + game.getFruitsEaten(), 50, drawY += 30);
 		g.drawString("Burgers Score: " + game.getNextFruitScore(), 50, drawY += 30);
 
-    drawY = 320;
-		g.drawString("Move Up: W / Up Arrowkey", LARGE_OFFSET, drawY += MESSAGE_STRIDE);
-		g.drawString("Move Down: S / Down Arrowkey", LARGE_OFFSET, drawY += MESSAGE_STRIDE);
-		g.drawString("Move Left: A / Left Arrowkey", LARGE_OFFSET, drawY += MESSAGE_STRIDE);
-		g.drawString("Move Right: D / Right Arrowkey", LARGE_OFFSET, drawY += MESSAGE_STRIDE);
-		g.drawString("Pause Game: P", LARGE_OFFSET, drawY += MESSAGE_STRIDE);
+    	drawY = 320;
+		g.drawString("Move Up: W / Up Arrowkey", 50, drawY += 30);
+		g.drawString("Move Down: S / Down Arrowkey", 50, drawY += 30);
+		g.drawString("Move Left: A / Left Arrowkey", 50, drawY += 30);
+		g.drawString("Move Right: D / Right Arrowkey", 50, drawY += 30);
+		g.drawString("Pause Game: P", 50, drawY += 30);
   }
 }

@@ -38,10 +38,10 @@ public class SnakeGame extends JFrame {
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.WEST);
 
-    addKeyListener(new KeyAdapter()) {
+    	addKeyListener(new KeyAdapter() {
 
       @Override
-      public void keyPressed(keyEvent e) {
+      public void keyPressed(KeyEvent e) {
         switch(e.getKeyCode()) {
   				case KeyEvent.VK_W:
   				case KeyEvent.VK_UP:
@@ -70,7 +70,7 @@ public class SnakeGame extends JFrame {
   				case KeyEvent.VK_A:
   				case KeyEvent.VK_LEFT:
   					if(!isPaused && !isGameOver) {
-  						if(directions.size() < MAX_DIRECTIONS) {
+  						if(directions.size() < 3) {
   							Direction last = directions.peekLast();
   							if(last != Direction.Right && last != Direction.Left) {
   								directions.addLast(Direction.Left);
@@ -82,7 +82,7 @@ public class SnakeGame extends JFrame {
   				case KeyEvent.VK_D:
   				case KeyEvent.VK_RIGHT:
   					if(!isPaused && !isGameOver) {
-  						if(directions.size() < MAX_DIRECTIONS) {
+  						if(directions.size() < 3) {
   							Direction last = directions.peekLast();
   							if(last != Direction.Left && last != Direction.Right) {
   								directions.addLast(Direction.Right);
@@ -105,12 +105,14 @@ public class SnakeGame extends JFrame {
   					break;           
         }    
       }
-    }
-  }
-
+    });
+	
 	pack();
 	setLocationRelativeTo(null);
 	setVisible(true);
+  }
+
+
 
   private void startGame() {
 		this.random = new Random();
@@ -125,7 +127,7 @@ public class SnakeGame extends JFrame {
       long start = System.nanoTime();
       logicTimer.update();
 
-      if(logicTimer.hasCyclePassed() {
+      if(logicTimer.hasCyclePassed()) {
         updateGame();
       }
 
@@ -143,7 +145,7 @@ public class SnakeGame extends JFrame {
     }
   }
 
-  private void UpdateGame() {
+  private void updateGame() {
     TileType collision = updateSnake();
     
 		if(collision == TileType.Fruit) {
@@ -159,7 +161,7 @@ public class SnakeGame extends JFrame {
   }
 
   private TileType updateSnake() {
-    Direction direction = direction.peekFirst();
+    Direction direction = directions.peekFirst();
 
   	Point head = new Point(snake.peekFirst());
 		switch(direction) {
@@ -215,7 +217,7 @@ public class SnakeGame extends JFrame {
     snake.clear();
     snake.add(head);
 
-    board.clear();
+    board.clearBoard();
     board.setTile(head, TileType.SnakeHead);
 
     directions.clear();
@@ -244,8 +246,8 @@ public class SnakeGame extends JFrame {
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - snake.size());
 
 		int freeFound = -1;
-		for(int x = 0; x < BoardPanel.COL_COUNT; x++) {
-			for(int y = 0; y < BoardPanel.ROW_COUNT; y++) {
+		for(int x = 0; x < BoardPanel.COLUMN; x++) {
+			for(int y = 0; y < BoardPanel.ROW; y++) {
 				TileType type = board.getTile(x, y);
 				if(type == null || type == TileType.Fruit) {
 					if(++freeFound == index) {
