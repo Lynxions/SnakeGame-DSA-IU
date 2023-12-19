@@ -38,7 +38,7 @@ public class SnakeGame extends JFrame {
 		add(board, BorderLayout.CENTER);
 		add(side, BorderLayout.WEST);
 
-    addKeyListener(new KeyAdapter() {
+    addKeyListener(new KeyAdapter()) {
 
       @Override
       public void keyPressed(keyEvent e) {
