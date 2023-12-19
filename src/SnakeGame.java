@@ -26,7 +26,7 @@ public class SnakeGame extends JFrame {
   private int fruitsEaten;
   private int nextFruitScore;
 
-	public CGame() {
+	public SnakeGame() {
 		super("Cheems's Burger Adventure");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
