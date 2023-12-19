@@ -26,7 +26,7 @@ public class SnakeGame extends JFrame {
   private int fruitsEaten;
   private int nextFruitScore;
 
-	public SnakeGame() {
+	public CGame() {
 		super("Cheems's Burger Adventure");
 		setLayout(new BorderLayout());
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -144,6 +144,137 @@ public class SnakeGame extends JFrame {
   }
 
   private void UpdateGame() {
+    TileType collision = updateSnake();
     
+		if(collision == TileType.Fruit) {
+			fruitsEaten++;
+			score += nextFruitScore;
+			spawnFruit();
+		} else if(collision == TileType.SnakeBody) {
+			isGameOver = true;
+			logicTimer.setPaused(true);
+		} else if(nextFruitScore > 10) {
+			nextFruitScore--;
+		}
   }
+
+  private TileType updateSnake() {
+    Direction direction = direction.peekFirst();
+
+  	Point head = new Point(snake.peekFirst());
+		switch(direction) {
+  		case Up:
+  			head.y--;
+  			break;
+  			
+  		case Down:
+  			head.y++;
+  			break;
+  			
+  		case Left:
+  			head.x--;
+  			break;
+  			
+  		case Right:
+  			head.x++;
+  			break;
+		}
+    
+		if(head.x < 0 || head.x >= BoardPanel.COLUMN || head.y < 0 || head.y >= BoardPanel.ROW) {
+			return TileType.SnakeBody;
+		}
+
+		TileType old = board.getTile(head.x, head.y);
+		if(old != TileType.Fruit && snake.size() > 5) {
+			Point tail = snake.removeLast();
+			board.setTile(tail, null);
+			old = board.getTile(head.x, head.y);
+		}
+
+		if(old != TileType.SnakeBody) {
+			board.setTile(snake.peekFirst(), TileType.SnakeBody);
+			snake.push(head);
+			board.setTile(head, TileType.SnakeHead);
+			if(directions.size() > 1) {
+				directions.poll();
+			}
+		}
+				
+		return old;    
+  }
+
+  private void resetGame() {
+    this.score = 0;
+    this.fruitsEaten = 0;
+
+    this.isNewGame = false;
+    this.isGameOver = false;
+
+    Point head = new Point(BoardPanel.COLUMN / 2, BoardPanel.ROW / 2);
+
+    snake.clear();
+    snake.add(head);
+
+    board.clear();
+    board.setTile(head, TileType.SnakeHead);
+
+    directions.clear();
+    directions.add(Direction.Up);
+
+    logicTimer.reset();
+
+    spawnFruit();
+  }
+
+	public boolean isNewGame() {
+		return isNewGame;
+	}
+  
+	public boolean isGameOver() {
+		return isGameOver;
+	}
+
+	public boolean isPaused() {
+		return isPaused;
+	}
+
+  private void spawnFruit() {
+    this.nextFruitScore = 100;
+
+    int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - snake.size());
+
+		int freeFound = -1;
+		for(int x = 0; x < BoardPanel.COL_COUNT; x++) {
+			for(int y = 0; y < BoardPanel.ROW_COUNT; y++) {
+				TileType type = board.getTile(x, y);
+				if(type == null || type == TileType.Fruit) {
+					if(++freeFound == index) {
+						board.setTile(x, y, TileType.Fruit);
+						break;
+					}
+				}
+			}
+		}
+  }
+
+  public int getScore() {
+    return score;
+  }
+
+	public int getFruitsEaten() {
+		return fruitsEaten;
+	}
+
+	public int getNextFruitScore() {
+		return nextFruitScore;
+	}
+
+	public Direction getDirection() {
+		return directions.peek();
+	}
+
+	public static void main(String[] args) {
+		SnakeGame snake = new SnakeGame();
+		snake.startGame();
+	}
 }
