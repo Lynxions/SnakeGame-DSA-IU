@@ -102,7 +102,16 @@ public class CheemsGame extends JFrame {
   					if(isNewGame || isGameOver) {
   						resetGame();
   					}
-  					break;           
+  					break;    
+				case KeyEvent.VK_SPACE:
+					if(!isPaused && !isGameOver) {
+						LinkedList<Direction> reversedDirections = new LinkedList<>();
+						while(!directions.isEmpty()) {
+						  reversedDirections.addFirst(directions.removeFirst());
+						}
+						directions = reversedDirections;
+					}
+					break;       
         }    
       }
     });
