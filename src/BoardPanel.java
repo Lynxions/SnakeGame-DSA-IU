@@ -2,8 +2,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class BoardPanel extends JPanel {
@@ -14,13 +16,14 @@ public class BoardPanel extends JPanel {
   private static final Font FONT = new Font("Arial", Font.BOLD, 25);
   private CheemsGame game;
   private TileType[] tiles;
+  Image burgerImage;
 
   public BoardPanel(CheemsGame game) {
     this.game = game;
     this.tiles = new TileType[COLUMN * ROW];
 
     setPreferredSize(new Dimension(COLUMN * TILE_SIZE, ROW * TILE_SIZE));
-    setBackground(Color.BLACK);
+    setBackground(Color.BLACK); 
   }
 
   public void clearBoard() {
@@ -91,12 +94,14 @@ public class BoardPanel extends JPanel {
   private void drawTile(int x, int y, TileType type, Graphics g) {
     switch(type) {
       case Burger:
-        g.setColor(Color.RED);
-        g.fillOval(x + 2, y + 2, TILE_SIZE - 4, TILE_SIZE - 4);
+        
+      	burgerImage  = new ImageIcon(this.getClass().getResource("images/burger1.png")).getImage();
+        g.drawImage(burgerImage, x - 3, y - 3, null);
+
 			  break;
 
       case CheemsBody:
-        g.setColor(Color.GREEN);
+        g.setColor(Color.ORANGE);
 			  g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
 			  break;
         

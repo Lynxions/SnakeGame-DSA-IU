@@ -2,7 +2,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 public class SidePanel extends JPanel {
@@ -10,20 +12,25 @@ public class SidePanel extends JPanel {
   private static final Font MEDIUM_FONT = new Font("Arial", Font.BOLD, 16);
   private static final Font SMALL_FONT = new Font("Arial", Font.BOLD, 12);
 
+  Image sideImage;
+
   private CheemsGame game;
 
   public SidePanel(CheemsGame game) {
     this.game = game;
 
     setPreferredSize(new Dimension(300, BoardPanel.ROW * BoardPanel.TILE_SIZE));
-		setBackground(Color.BLACK);
+	setBackground(Color.WHITE);
+	sideImage  = new ImageIcon(this.getClass().getResource("images/doge-cheems1.gif")).getImage();
+
   }
 
   @Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		g.drawImage(sideImage,-40,50,null);
 
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK);
 
 		g.setFont(LARGE_FONT);
 		g.drawString("Cheems's Burger Adventure", getWidth() / 2 - g.getFontMetrics().stringWidth("Cheems's Burger Adventure") / 2, 50);
