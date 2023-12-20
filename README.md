@@ -1,18 +1,24 @@
-## Getting Started
+# Cheems's Burger Adventure
+## Details
+**Created By:**
+- [Tien Son](https://github.com/Lynxions)
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is a Simple [Java Snake Game](https://en.wikipedia.org/wiki/Snake_(video_game_genre))
 
-## Folder Structure
+This game was made as a part of project in Data Structure And Algorithm course at IU-HCMC
 
-The workspace contains two folders by default, where:
+uses Java and Javax 100% as source code for creating the program
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Implementation
+- Control a Cheems (snake) to move around and eat as much burgers as possible and earn points without collide with it's body or the edge of the screen.
+- Additionally, there's random powerups for Cheems throughout the game to collect
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Screenshots from the game
+![alt_text]
+![alt_text]
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## How to run
+- After downloading the zip file, extract and open the folder with Intellij or Visual Studio Code
+- Intellij: Select the file "CheemsGame.java" on the toolbar press "Run" and Run "CheemsGame" or press Shift F10 to run the game
+- VSCode: Select the file "CheemsGame.java" and press the "Run Java" icon to run the game
+- Enjoy!
