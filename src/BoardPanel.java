@@ -17,6 +17,7 @@ public class BoardPanel extends JPanel {
   private CheemsGame game;
   private TileType[] tiles;
   Image burgerImage;
+  Image drinkImage;
 
   public BoardPanel(CheemsGame game) {
     this.game = game;
@@ -106,6 +107,11 @@ public class BoardPanel extends JPanel {
       case CheemsHead:
         g.setColor(Color.GREEN);
         g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+        break;
+      
+      case Drink:
+        drinkImage = new ImageIcon(this.getClass().getResource("images/drinks.png")).getImage();
+        g.drawImage(drinkImage, x, y, null);
     }
   }  
 }

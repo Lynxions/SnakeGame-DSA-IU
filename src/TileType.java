@@ -5,6 +5,8 @@ public enum TileType {
 	
 	CheemsHead,
 	
-	CheemsBody
+	CheemsBody,
+
+	Drink
 	
 }

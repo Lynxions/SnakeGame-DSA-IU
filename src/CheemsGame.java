@@ -160,12 +160,20 @@ public class CheemsGame extends JFrame {
 		if(collision == TileType.Burger) {
 			fruitsEaten++;
 			score += nextFruitScore;
-			spawnFruit();
+			if(fruitsEaten % 5 == 0) {
+				spawnDrink();
+			} else {
+				spawnFruit();
+			}
 		} else if(collision == TileType.CheemsBody) {
 			isGameOver = true;
 			logicTimer.setPaused(true);
 		} else if(nextFruitScore > 10) {
 			nextFruitScore--;
+		} else if(collision == TileType.Drink) {
+			fruitsEaten++;
+			score += nextFruitScore;
+			spawnFruit();
 		}
   }
 
@@ -235,6 +243,7 @@ public class CheemsGame extends JFrame {
     logicTimer.reset();
 
     spawnFruit();
+	spawnDrink();
   }
 
 	public boolean isNewGame() {
@@ -261,6 +270,24 @@ public class CheemsGame extends JFrame {
 				if(type == null || type == TileType.Burger) {
 					if(++freeFound == index) {
 						board.setTile(x, y, TileType.Burger);
+						break;
+					}
+				}
+			}
+		}
+  }
+  private void spawnDrink() {
+    this.nextFruitScore = 100;
+
+    int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
+
+		int freeFound = -1;
+		for(int x = 0; x < BoardPanel.COLUMN; x++) {
+			for(int y = 0; y < BoardPanel.ROW; y++) {
+				TileType type = board.getTile(x, y);
+				if(type == null || type == TileType.Drink) {
+					if(++freeFound == index) {
+						board.setTile(x, y, TileType.Drink);
 						break;
 					}
 				}
