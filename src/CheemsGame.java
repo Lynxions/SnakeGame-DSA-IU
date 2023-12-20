@@ -23,8 +23,10 @@ public class CheemsGame extends JFrame {
   private LinkedList<Direction> directions;
 
   private int score;
-  private int fruitsEaten;
-  private int nextFruitScore;
+  private int burgersEaten;
+  private int drinksEaten;
+  private int nextBurgerScore;
+  private int nextDrinkScore;
 
 	public CheemsGame() {
 		super("Cheems's Burger Adventure");
@@ -158,22 +160,22 @@ public class CheemsGame extends JFrame {
     TileType collision = updatecheems();
     
 		if(collision == TileType.Burger) {
-			fruitsEaten++;
-			score += nextFruitScore;
-			if(fruitsEaten % 5 == 0) {
+			burgersEaten++;
+			score += nextBurgerScore;
+			if(burgersEaten == 0 && burgersEaten % 5 == 0) {
 				spawnDrink();
 			} else {
-				spawnFruit();
+				spawnBurger();
 			}
 		} else if(collision == TileType.CheemsBody) {
 			isGameOver = true;
 			logicTimer.setPaused(true);
-		} else if(nextFruitScore > 10) {
-			nextFruitScore--;
+		} else if(nextBurgerScore > 10) {
+			nextBurgerScore--;
 		} else if(collision == TileType.Drink) {
-			fruitsEaten++;
-			score += nextFruitScore;
-			spawnFruit();
+			burgersEaten++;
+			score += nextBurgerScore;
+			spawnBurger();
 		}
   }
 
@@ -224,7 +226,7 @@ public class CheemsGame extends JFrame {
 
   private void resetGame() {
     this.score = 0;
-    this.fruitsEaten = 0;
+    this.burgersEaten = 0;
 
     this.isNewGame = false;
     this.isGameOver = false;
@@ -242,7 +244,7 @@ public class CheemsGame extends JFrame {
 
     logicTimer.reset();
 
-    spawnFruit();
+    spawnBurger();
 	spawnDrink();
   }
 
@@ -258,8 +260,8 @@ public class CheemsGame extends JFrame {
 		return isPaused;
 	}
 
-  private void spawnFruit() {
-    this.nextFruitScore = 100;
+  private void spawnBurger() {
+    this.nextBurgerScore = 100;
 
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
 
@@ -277,7 +279,7 @@ public class CheemsGame extends JFrame {
 		}
   }
   private void spawnDrink() {
-    this.nextFruitScore = 100;
+    this.nextDrinkScore = 100;
 
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
 
@@ -299,12 +301,20 @@ public class CheemsGame extends JFrame {
     return score;
   }
 
-	public int getFruitsEaten() {
-		return fruitsEaten;
+	public int getBurgersEaten() {
+		return burgersEaten;
 	}
 
-	public int getNextFruitScore() {
-		return nextFruitScore;
+	public int getNextBurgerScore() {
+		return nextBurgerScore;
+	}
+
+	public int getDrinksEaten() {
+		return drinksEaten;
+	}
+
+	public int getNextDrinkScore() {
+		return nextDrinkScore;
 	}
 
 	public Direction getDirection() {

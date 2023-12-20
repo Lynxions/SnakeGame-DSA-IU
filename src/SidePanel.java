@@ -43,8 +43,8 @@ public class SidePanel extends JPanel {
 
 		int drawY = 150;
 		g.drawString("Total Score: " + game.getScore(), 50, drawY += 30);
-		g.drawString("Burgers Eaten: " + game.getFruitsEaten(), 50, drawY += 30);
-		g.drawString("Burgers Score: " + game.getNextFruitScore(), 50, drawY += 30);
+		g.drawString("Burgers Eaten: " + game.getBurgersEaten(), 50, drawY += 30);
+		g.drawString("Burgers Score: " + game.getNextBurgerScore(), 50, drawY += 30);
 
     	drawY = 320;
 		g.drawString("Move Up: W / Up Arrowkey", 50, drawY += 30);
