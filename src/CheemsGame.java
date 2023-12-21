@@ -23,8 +23,10 @@ public class CheemsGame extends JFrame {
   private LinkedList<Direction> directions;
 
   private int score;
-  private int fruitsEaten;
-  private int nextFruitScore;
+  private int burgersEaten;
+  private int drinksEaten;
+  private int nextBurgerScore;
+  private int nextDrinkScore;
 
 	public CheemsGame() {
 		super("Cheems's Burger Adventure");
@@ -158,14 +160,23 @@ public class CheemsGame extends JFrame {
     TileType collision = updatecheems();
     
 		if(collision == TileType.Burger) {
-			fruitsEaten++;
-			score += nextFruitScore;
-			spawnFruit();
+			burgersEaten++;
+
+			score += nextBurgerScore;
+			if(burgersEaten % 5 == 0) {
+				spawnDrink();
+			} else {
+				spawnBurger();
+			}
+			logicTimer.setCyclesPerSecond(9.0f);
+		} else if(collision == TileType.Drink) {
+			logicTimer.setCyclesPerSecond(15.0f);
+			spawnBurger();
 		} else if(collision == TileType.CheemsBody) {
 			isGameOver = true;
 			logicTimer.setPaused(true);
-		} else if(nextFruitScore > 10) {
-			nextFruitScore--;
+		} else if(nextBurgerScore > 10) {
+			nextBurgerScore--;
 		}
   }
 
@@ -216,7 +227,7 @@ public class CheemsGame extends JFrame {
 
   private void resetGame() {
     this.score = 0;
-    this.fruitsEaten = 0;
+    this.burgersEaten = 0;
 
     this.isNewGame = false;
     this.isGameOver = false;
@@ -234,7 +245,7 @@ public class CheemsGame extends JFrame {
 
     logicTimer.reset();
 
-    spawnFruit();
+    spawnBurger();
   }
 
 	public boolean isNewGame() {
@@ -249,8 +260,8 @@ public class CheemsGame extends JFrame {
 		return isPaused;
 	}
 
-  private void spawnFruit() {
-    this.nextFruitScore = 100;
+  private void spawnBurger() {
+    this.nextBurgerScore = 100;
 
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
 
@@ -267,17 +278,43 @@ public class CheemsGame extends JFrame {
 			}
 		}
   }
+  private void spawnDrink() {
+    this.nextDrinkScore = 100;
+
+    int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
+
+		int freeFound = -1;
+		for(int x = 0; x < BoardPanel.COLUMN; x++) {
+			for(int y = 0; y < BoardPanel.ROW; y++) {
+				TileType type = board.getTile(x, y);
+				if(type == null || type == TileType.Drink) {
+					if(++freeFound == index) {
+						board.setTile(x, y, TileType.Drink);
+						break;
+					}
+				}
+			}
+		}
+  }
 
   public int getScore() {
     return score;
   }
 
-	public int getFruitsEaten() {
-		return fruitsEaten;
+	public int getBurgersEaten() {
+		return burgersEaten;
 	}
 
-	public int getNextFruitScore() {
-		return nextFruitScore;
+	public int getNextBurgerScore() {
+		return nextBurgerScore;
+	}
+
+	public int getDrinksEaten() {
+		return drinksEaten;
+	}
+
+	public int getNextDrinkScore() {
+		return nextDrinkScore;
 	}
 
 	public Direction getDirection() {
