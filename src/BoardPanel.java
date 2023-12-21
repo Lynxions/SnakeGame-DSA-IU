@@ -112,6 +112,7 @@ public class BoardPanel extends JPanel {
       case Drink:
         drinkImage = new ImageIcon(this.getClass().getResource("images/drinks.png")).getImage();
         g.drawImage(drinkImage, x, y, null);
+        break;
     }
   }  
 }

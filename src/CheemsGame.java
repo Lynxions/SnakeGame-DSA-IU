@@ -161,21 +161,22 @@ public class CheemsGame extends JFrame {
     
 		if(collision == TileType.Burger) {
 			burgersEaten++;
+
 			score += nextBurgerScore;
-			if(burgersEaten == 0 && burgersEaten % 5 == 0) {
+			if(burgersEaten % 5 == 0) {
 				spawnDrink();
 			} else {
 				spawnBurger();
 			}
+			logicTimer.setCyclesPerSecond(9.0f);
+		} else if(collision == TileType.Drink) {
+			logicTimer.setCyclesPerSecond(15.0f);
+			spawnBurger();
 		} else if(collision == TileType.CheemsBody) {
 			isGameOver = true;
 			logicTimer.setPaused(true);
 		} else if(nextBurgerScore > 10) {
 			nextBurgerScore--;
-		} else if(collision == TileType.Drink) {
-			burgersEaten++;
-			score += nextBurgerScore;
-			spawnBurger();
 		}
   }
 
@@ -245,7 +246,6 @@ public class CheemsGame extends JFrame {
     logicTimer.reset();
 
     spawnBurger();
-	spawnDrink();
   }
 
 	public boolean isNewGame() {
