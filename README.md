@@ -1,7 +1,7 @@
 # Cheems's Burger Adventure
 ## Details
 **Created By:**
-- [Tien Son](https://github.com/Lynxions)
+- [Nguyen Tien Son](https://github.com/Lynxions)
 
 This is a Simple [Java Snake Game](https://en.wikipedia.org/wiki/Snake_(video_game_genre))
 
@@ -11,7 +11,7 @@ uses Java and Javax 100% as source code for creating the program
 
 ## Implementation
 - Control a Cheems (snake) to move around and eat as much burgers as possible and earn points without collide with it's body or the edge of the screen.
-- Additionally, there's random powerups for Cheems throughout the game to collect
+- Additionally, there's random powerups for Cheems throughout the game to collect such as Drinks (increase speed) and Frenzy Mode (More Burgers)
 
 ## Screenshots from the game
 ![alt_text]
