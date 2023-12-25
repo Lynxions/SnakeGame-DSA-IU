@@ -24,9 +24,7 @@ public class CheemsGame extends JFrame {
 
   private int score;
   private int burgersEaten;
-  private int drinksEaten;
   private int nextBurgerScore;
-  private int nextDrinkScore;
 
 	public CheemsGame() {
 		super("Cheems's Burger Adventure");
@@ -116,7 +114,7 @@ public class CheemsGame extends JFrame {
 
 
 
-  private void startGame() {
+  public void startGame() {
 		this.random = new Random();
 		this.cheems = new LinkedList<>();
 		this.directions = new LinkedList<>();
@@ -147,7 +145,7 @@ public class CheemsGame extends JFrame {
     }
   }
 
-  private void updateGame() {
+  public void updateGame() {
     TileType collision = updatecheems();
     
 		if(collision == TileType.Burger) {
@@ -174,7 +172,7 @@ public class CheemsGame extends JFrame {
 		}
   }
 
-  private TileType updatecheems() {
+  public TileType updatecheems() {
     Direction direction = directions.peekFirst();
 
   	Point head = new Point(cheems.peekFirst());
@@ -219,7 +217,7 @@ public class CheemsGame extends JFrame {
 		return old;    
   }
 
-  private void resetGame() {
+  public void resetGame() {
     this.score = 0;
     this.burgersEaten = 0;
 
@@ -255,7 +253,7 @@ public class CheemsGame extends JFrame {
 		return isPaused;
 	}
 
-  private void spawnBurger() {
+  public void spawnBurger() {
     this.nextBurgerScore = 100;
 
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
@@ -273,7 +271,7 @@ public class CheemsGame extends JFrame {
 			}
 		}
   }
-  private void spawnDrink() {
+  public void spawnDrink() {
     this.nextBurgerScore = 100;
 
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
