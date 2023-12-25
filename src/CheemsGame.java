@@ -104,16 +104,7 @@ public class CheemsGame extends JFrame {
   					if(isNewGame || isGameOver) {
   						resetGame();
   					}
-  					break;    
-				case KeyEvent.VK_SPACE:
-					if(!isPaused && !isGameOver) {
-						LinkedList<Direction> reversedDirections = new LinkedList<>();
-						while(!directions.isEmpty()) {
-						  reversedDirections.addFirst(directions.removeFirst());
-						}
-						directions = reversedDirections;
-					}
-					break;       
+  					break;          
         }    
       }
     });
@@ -129,7 +120,7 @@ public class CheemsGame extends JFrame {
 		this.random = new Random();
 		this.cheems = new LinkedList<>();
 		this.directions = new LinkedList<>();
-		this.logicTimer = new Clock(9.0f);
+		this.logicTimer = new Clock(13.0f);
 		this.isNewGame = true;
 
     logicTimer.setPaused(true);
@@ -161,16 +152,19 @@ public class CheemsGame extends JFrame {
     
 		if(collision == TileType.Burger) {
 			burgersEaten++;
-
 			score += nextBurgerScore;
 			if(burgersEaten % 5 == 0) {
 				spawnDrink();
 			} else {
 				spawnBurger();
 			}
-			logicTimer.setCyclesPerSecond(9.0f);
+			if(burgersEaten > 20 && burgersEaten <25) {
+				spawnBurger();
+				spawnDrink();
+			}
+			logicTimer.setCyclesPerSecond(13.0f);
 		} else if(collision == TileType.Drink) {
-			logicTimer.setCyclesPerSecond(15.0f);
+			logicTimer.setCyclesPerSecond(20.0f);
 			spawnBurger();
 		} else if(collision == TileType.CheemsBody) {
 			isGameOver = true;
@@ -244,6 +238,7 @@ public class CheemsGame extends JFrame {
     directions.add(Direction.Up);
 
     logicTimer.reset();
+	logicTimer.setCyclesPerSecond(13.0f);
 
     spawnBurger();
   }
@@ -279,7 +274,7 @@ public class CheemsGame extends JFrame {
 		}
   }
   private void spawnDrink() {
-    this.nextDrinkScore = 100;
+    this.nextBurgerScore = 100;
 
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
 
@@ -307,14 +302,6 @@ public class CheemsGame extends JFrame {
 
 	public int getNextBurgerScore() {
 		return nextBurgerScore;
-	}
-
-	public int getDrinksEaten() {
-		return drinksEaten;
-	}
-
-	public int getNextDrinkScore() {
-		return nextDrinkScore;
 	}
 
 	public Direction getDirection() {
