@@ -95,7 +95,7 @@ public class BoardPanel extends JPanel {
   private void drawTile(int x, int y, TileType type, Graphics g) {
     switch(type) {
       case Burger:        
-      	burgerImage  = new ImageIcon(this.getClass().getResource("images/burger1.png")).getImage();
+      	burgerImage  = new ImageIcon(this.getClass().getResource("images/burger.png")).getImage();
         g.drawImage(burgerImage, x - 3, y - 3, null);
 			  break;
 

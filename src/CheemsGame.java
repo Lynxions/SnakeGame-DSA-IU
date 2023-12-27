@@ -156,7 +156,7 @@ public class CheemsGame extends JFrame {
 			} else {
 				spawnBurger();
 			}
-			if(burgersEaten > 20 && burgersEaten <25) {
+			if(burgersEaten > 20 && burgersEaten <30) {
 				spawnBurger();
 				spawnDrink();
 			}
