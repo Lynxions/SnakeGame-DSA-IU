@@ -18,6 +18,8 @@ public class BoardPanel extends JPanel {
   private TileType[] tiles;
   Image burgerImage;
   Image drinkImage;
+  Image bodyImage;
+  Image headImage;
 
   public BoardPanel(CheemsGame game) {
     this.game = game;
@@ -100,14 +102,55 @@ public class BoardPanel extends JPanel {
 			  break;
 
       case CheemsBody:
-        g.setColor(Color.ORANGE);
-			  g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        switch(game.getDirection()) {
+            case Up: 
+            bodyImage  = new ImageIcon(this.getClass().getResource("images/body.png")).getImage();
+            g.drawImage(bodyImage, x, y, null);
+            break;
+          
+          case Down:
+            g.drawImage(bodyImage, x, y, null);
+            break;
+            
+          case Left: 
+            bodyImage  = new ImageIcon(this.getClass().getResource("images/body-horizontal.png")).getImage();
+            g.drawImage(bodyImage, x, y, null);
+            break;
+          
+          case Right:
+            g.drawImage(bodyImage, x, y, null);
+            break;
+
+        }
 			  break;
         
       case CheemsHead:
-        g.setColor(Color.GREEN);
-        g.fillRect(x, y, TILE_SIZE, TILE_SIZE);
+
+        switch(game.getDirection()) {
+          case Up: 
+            headImage  = new ImageIcon(this.getClass().getResource("images/head-up.png")).getImage();
+            g.drawImage(headImage, x, y, null);
+            break;
+          
+          case Down:
+            headImage  = new ImageIcon(this.getClass().getResource("images/head-down.png")).getImage();
+            g.drawImage(headImage, x, y, null);
+            break;
+            
+          case Left: 
+            headImage  = new ImageIcon(this.getClass().getResource("images/head-left.png")).getImage();
+            g.drawImage(headImage, x, y, null);
+            break;
+          
+          case Right:
+            headImage  = new ImageIcon(this.getClass().getResource("images/head-right.png")).getImage();
+            g.drawImage(headImage, x, y, null);
+            break;
+
+          }
         break;
+
       
       case Drink:
         drinkImage = new ImageIcon(this.getClass().getResource("images/drinks.png")).getImage();

@@ -156,9 +156,13 @@ public class CheemsGame extends JFrame {
 			} else {
 				spawnBurger();
 			}
-			if(burgersEaten > 20 && burgersEaten <30) {
+			if(burgersEaten > 15 && burgersEaten <20) {
 				spawnBurger();
 				spawnDrink();
+			}
+			if(burgersEaten == 25) {
+				board.clearBoard();
+				spawnBurger();
 			}
 			logicTimer.setCyclesPerSecond(13.0f);
 		} else if(collision == TileType.Drink) {
@@ -272,8 +276,6 @@ public class CheemsGame extends JFrame {
 		}
   }
   public void spawnDrink() {
-    this.nextBurgerScore = 100;
-
     int index = random.nextInt(BoardPanel.COLUMN * BoardPanel.ROW - cheems.size());
 
 		int freeFound = -1;
