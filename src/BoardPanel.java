@@ -16,10 +16,10 @@ public class BoardPanel extends JPanel {
   private static final Font FONT = new Font("Arial", Font.BOLD, 25);
   private CheemsGame game;
   private TileType[] tiles;
-  Image burgerImage;
-  Image drinkImage;
-  Image bodyImage;
-  Image headImage;
+  private Image burgerImage;
+  private Image drinkImage;
+  private Image bodyImage;
+  private Image headImage;
 
   public BoardPanel(CheemsGame game) {
     this.game = game;
