@@ -202,14 +202,14 @@ public class CheemsGame extends JFrame {
 			return TileType.CheemsBody;
 		}
 
-		TileType old = board.getTile(head.x, head.y);
-		if(old != TileType.Burger && cheems.size() > 5) {
+		TileType empty = board.getTile(head.x, head.y);
+		if(empty != TileType.Burger && cheems.size() > 5) {
 			Point tail = cheems.removeLast();
 			board.setTile(tail, null);
-			old = board.getTile(head.x, head.y);
+			empty = board.getTile(head.x, head.y);
 		}
 
-		if(old != TileType.CheemsBody) {
+		if(empty != TileType.CheemsBody) {
 			board.setTile(cheems.peekFirst(), TileType.CheemsBody);
 			cheems.push(head);
 			board.setTile(head, TileType.CheemsHead);
@@ -218,7 +218,7 @@ public class CheemsGame extends JFrame {
 			}
 		}
 				
-		return old;    
+		return empty;    
   }
 
   public void resetGame() {
