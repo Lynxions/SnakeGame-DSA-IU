@@ -156,11 +156,11 @@ public class CheemsGame extends JFrame {
 			} else {
 				spawnBurger();
 			}
-			if(burgersEaten > 15 && burgersEaten <20) {
+			if(burgersEaten >= 10 && (burgersEaten % 10 == 0)) {
 				spawnBurger();
 				spawnDrink();
 			}
-			if(burgersEaten == 25) {
+			if(burgersEaten % 25 == 0) {
 				board.clearBoard();
 				spawnBurger();
 			}
